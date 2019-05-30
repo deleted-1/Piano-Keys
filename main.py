@@ -1,5 +1,8 @@
 import pygame as pg 
 from tkinter import *
+import music_sheet
+import asyncio
+from datetime import datetime
 song_list = open("songs.txt","r")
 pg.init()
 pg.font.init()
@@ -26,19 +29,31 @@ class main:
         song_window()
 
         def run():
-            if str(chosen_song.get()) !== "Mary Had A Little Lamb": return;
-            game()
+            if str(chosen_song.get()) != "Mary Had A Little Lamb": return;
+            game(str(chosen_song.get()))
 
         Button(self.window, text='Quit', width=5, command=self.window.quit).place(x=70,y=200)
         Button(self.window, text='Play', width=5, command=run).place(x=150,y=200)
 
         mainloop()
 
-    def game():
+    def game(chosen_song):
         screen = pg.display.set_mode((1000,900), pg.RESIZABLE)
         pg.display.set_caption("Piano Keys")
+        notes = music_sheet[chosen_song].notes
+        print('Notes: {}'.format(notes))
 
-        
+        """
+        past_time = datetime.now()
+        present_time = datetime.now()
+        keepGoing = True
+        while keepGoing:
+        if (present_time-past_time).seconds === 4:
+            keepGoing = False
+            print("Four seconds have passed!")
+        present_time = datetime.now()
+        """
+
 
 main()
 
