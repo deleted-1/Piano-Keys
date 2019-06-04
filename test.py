@@ -1,12 +1,29 @@
 from datetime import datetime
+import pygame as pg
+import asyncio
+import string
+from msvcrt import getch
+playable = {'a'}
+
+pg.init()
+pg.mixer.init()
 
 def game():
-    past_time = datetime.now()
-    present_time = datetime.now()
     keepGoing = True
+    
     while keepGoing:
-        if (present_time-past_time).seconds === 4:
-            keepGoing = False
-            print("Four seconds have passed!")
+        key = getch()
+        for event in pg.event.get():
+            if event == pg.QUIT():  keepGoing = False
+    
+        if key in string.ascii_lowercase and key in playable:   sound = pg.mixer.Sound('piano_{}.wav'.format(key.toUpperCase()))
+            
+        
+   
+                    
+                    
+                    
 
-game()
+def play_sound():
+    pass
+
