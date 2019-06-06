@@ -1,7 +1,6 @@
 import pygame as pg 
 from tkinter import *
 import music_sheet
-import asyncio
 from datetime import datetime
 song_list = open("songs.txt","r")
 pg.init()
