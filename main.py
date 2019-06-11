@@ -1,8 +1,12 @@
+# Import and Initialize
 import datetime
 import pygame
 import mySprites
 import time
 from tkinter import *
+pygame.mixer.pre_init(44100, -16, 50, 512)
+pygame.init()
+pygame.mixer.init()
 
 music_sheet = {
         "Mary Had A Little Lamb":{
@@ -19,16 +23,14 @@ music_sheet = {
         }
     }
 def game(song=None):
-
-    pygame.mixer.pre_init(44100, -16, 50, 512)
-    pygame.init()
-    pygame.mixer.init()
+    """
+    Takes the song/mode that was inputted
+    and prepares the game to play.
+    """
     pygame.mixer.set_num_channels(50)
     keepGoing = True
+    # Display configuration
     screen = pygame.display.set_mode((500, 900), pygame.RESIZABLE)
-    background = pygame.Surface(screen.get_size())
-    background = background.convert()
-    background.fill((47, 102, 191))    
     boolean = False
     white_keys = []
     boolean = []
@@ -51,6 +53,7 @@ def game(song=None):
     "6":"G#",
     "7":"A#"
     }
+    # Assign values to key variables
     barnote = []
     barsize = []
     iterator = 0
@@ -75,11 +78,21 @@ def game(song=None):
     font = pygame.font.Font('freesansbold.ttf',20) 
 
     score_board = mySprites.score_board()
+
+    # Entities
+    background = pygame.Surface(screen.get_size())
+    background = background.convert()
+    background.fill((47, 102, 191))    
+    clock = pg.time.Clock()
+    # Loop
     while keepGoing:
+        # Timer to set frame rate
+        clock.tick(60)
         time.sleep(0.001)
         screen.blit(background,(0,0)) 
         present_time = datetime.datetime.utcnow()
 
+        # Event Handling
         for event in pygame.event.get():
 
             if event.type == pygame.QUIT:
@@ -113,6 +126,7 @@ def game(song=None):
                     index = list(keys).index(key_realesed)
                     boolean[index] = False
 
+        # Refresh Display
         if song != 'Sandbox':
             if barnote[len(barnote)-1].location[1] > 726:
                 score_board.end_screen(screen)
@@ -143,7 +157,12 @@ def game(song=None):
         score_board.display(screen)
         pygame.display.flip()
 
-class main:    
+class main:
+    """
+    Creates tkinter window
+    the user inputs a song
+    in here
+    """   
     def __init__(self):
         self.window = Tk()
         self.window.title("Welcome to Piano Keys!")
