@@ -83,7 +83,7 @@ def game(song=None):
     background = pygame.Surface(screen.get_size())
     background = background.convert()
     background.fill((47, 102, 191))    
-    clock = pg.time.Clock()
+    clock = pygame.time.Clock()
     # Loop
     while keepGoing:
         # Timer to set frame rate
