@@ -83,11 +83,10 @@ def game(song=None):
     background = pygame.Surface(screen.get_size())
     background = background.convert()
     background.fill((47, 102, 191))    
-    clock = pygame.time.Clock()
     # Loop
     while keepGoing:
         # Timer to set frame rate
-        clock.tick(60)
+        
         time.sleep(0.001)
         screen.blit(background,(0,0)) 
         present_time = datetime.datetime.utcnow()
